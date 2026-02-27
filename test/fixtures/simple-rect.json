@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "title": "Simple Rectangle",
+    "theme": "light"
+  },
+  "elements": [
+    {
+      "type": "rectangle",
+      "id": "rect1",
+      "x": 50,
+      "y": 50,
+      "width": 200,
+      "height": 100,
+      "backgroundColor": "#a5d8ff",
+      "fillStyle": "solid",
+      "label": {
+        "text": "Hello World"
+      }
+    }
+  ]
+}

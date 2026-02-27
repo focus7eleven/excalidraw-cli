@@ -1,0 +1,440 @@
+meta:
+  title: "权力的游戏 · 主要人物关系图"
+  theme: light
+  background: "#f8f9fa"
+
+elements:
+  # Title
+  - type: text
+    id: title
+    x: 590
+    y: 0
+    text: "权力的游戏 · 主要人物关系图"
+    fontSize: 22
+    strokeColor: "#343a40"
+
+  # House Labels
+  - type: text
+    id: house_targ
+    x: 160
+    y: 55
+    text: "House Targaryen"
+    fontSize: 14
+    strokeColor: "#7048e8"
+
+  - type: text
+    id: house_stark
+    x: 700
+    y: 55
+    text: "House Stark"
+    fontSize: 14
+    strokeColor: "#1971c2"
+
+  - type: text
+    id: house_lann
+    x: 1120
+    y: 55
+    text: "House Lannister"
+    fontSize: 14
+    strokeColor: "#e67700"
+
+  # =============================================
+  # Gen 1 — Patriarchs
+  # =============================================
+
+  - type: rectangle
+    id: aerys
+    x: 160
+    y: 85
+    width: 200
+    height: 55
+    backgroundColor: "#d0bfff"
+    fillStyle: solid
+    strokeColor: "#7048e8"
+    label:
+      text: "Aerys II（疯王）"
+      fontSize: 14
+
+  - type: rectangle
+    id: ned
+    x: 580
+    y: 85
+    width: 170
+    height: 55
+    backgroundColor: "#a5d8ff"
+    fillStyle: solid
+    strokeColor: "#1971c2"
+    label:
+      text: "Eddard Stark"
+      fontSize: 14
+
+  - type: rectangle
+    id: catelyn
+    x: 818
+    y: 85
+    width: 160
+    height: 55
+    backgroundColor: "#fcc2d7"
+    fillStyle: solid
+    strokeColor: "#c2255c"
+    label:
+      text: "Catelyn Tully"
+      fontSize: 14
+
+  - type: rectangle
+    id: tywin
+    x: 1120
+    y: 85
+    width: 200
+    height: 55
+    backgroundColor: "#ffec99"
+    fillStyle: solid
+    strokeColor: "#e67700"
+    label:
+      text: "Tywin Lannister"
+      fontSize: 14
+
+  # =============================================
+  # Gen 2 — same row: Rhaegar, Lyanna, Daenerys, Stark kids, Lannister kids
+  # =============================================
+
+  - type: rectangle
+    id: rhaegar
+    x: 0
+    y: 260
+    width: 130
+    height: 55
+    backgroundColor: "#d0bfff"
+    fillStyle: solid
+    strokeColor: "#7048e8"
+    label:
+      text: "Rhaegar"
+      fontSize: 14
+
+  - type: rectangle
+    id: lyanna
+    x: 180
+    y: 260
+    width: 150
+    height: 55
+    backgroundColor: "#fcc2d7"
+    fillStyle: solid
+    strokeColor: "#c2255c"
+    label:
+      text: "Lyanna Stark"
+      fontSize: 14
+
+  - type: rectangle
+    id: daenerys
+    x: 380
+    y: 260
+    width: 150
+    height: 55
+    backgroundColor: "#d0bfff"
+    fillStyle: solid
+    strokeColor: "#7048e8"
+    label:
+      text: "Daenerys"
+      fontSize: 14
+
+  - type: rectangle
+    id: robb
+    x: 580
+    y: 260
+    width: 110
+    height: 55
+    backgroundColor: "#a5d8ff"
+    fillStyle: solid
+    strokeColor: "#1971c2"
+    label:
+      text: "Robb"
+      fontSize: 14
+
+  - type: rectangle
+    id: sansa
+    x: 720
+    y: 260
+    width: 110
+    height: 55
+    backgroundColor: "#fcc2d7"
+    fillStyle: solid
+    strokeColor: "#c2255c"
+    label:
+      text: "Sansa"
+      fontSize: 14
+
+  - type: rectangle
+    id: arya
+    x: 860
+    y: 260
+    width: 110
+    height: 55
+    backgroundColor: "#fcc2d7"
+    fillStyle: solid
+    strokeColor: "#c2255c"
+    label:
+      text: "Arya"
+      fontSize: 14
+
+  - type: rectangle
+    id: cersei
+    x: 1020
+    y: 260
+    width: 120
+    height: 55
+    backgroundColor: "#ffec99"
+    fillStyle: solid
+    strokeColor: "#e67700"
+    label:
+      text: "Cersei"
+      fontSize: 14
+
+  - type: rectangle
+    id: jaime
+    x: 1200
+    y: 260
+    width: 120
+    height: 55
+    backgroundColor: "#ffec99"
+    fillStyle: solid
+    strokeColor: "#e67700"
+    label:
+      text: "Jaime"
+      fontSize: 14
+
+  - type: rectangle
+    id: tyrion
+    x: 1360
+    y: 260
+    width: 120
+    height: 55
+    backgroundColor: "#ffec99"
+    fillStyle: solid
+    strokeColor: "#e67700"
+    label:
+      text: "Tyrion"
+      fontSize: 14
+
+  # Robert — below Cersei/Jaime area
+  - type: rectangle
+    id: robert
+    x: 1200
+    y: 385
+    width: 120
+    height: 55
+    backgroundColor: "#b2f2bb"
+    fillStyle: solid
+    strokeColor: "#2f9e44"
+    label:
+      text: "Robert"
+      fontSize: 14
+
+  # =============================================
+  # Gen 3
+  # =============================================
+
+  - type: rectangle
+    id: jon
+    x: 50
+    y: 430
+    width: 180
+    height: 60
+    backgroundColor: "#b197fc"
+    fillStyle: solid
+    strokeColor: "#6741d9"
+    label:
+      text: "Jon Snow"
+      fontSize: 16
+
+  - type: rectangle
+    id: joffrey
+    x: 1060
+    y: 490
+    width: 130
+    height: 55
+    backgroundColor: "#ffec99"
+    fillStyle: solid
+    strokeColor: "#e67700"
+    label:
+      text: "Joffrey"
+      fontSize: 14
+
+  # =============================================
+  # Couple connectors
+  # =============================================
+
+  # Ned — Catelyn (夫妻, horizontal bar in the 68px gap)
+  - type: arrow
+    id: couple_ned_cat
+    x: 751
+    y: 112
+    points: [[0, 0], [66, 0]]
+    strokeColor: "#e03131"
+    strokeWidth: 3
+    startArrowhead: null
+    endArrowhead: null
+    label:
+      text: "夫妻"
+      fontSize: 13
+      strokeColor: "#e03131"
+
+  # Rhaegar — Lyanna (恋人, dashed horizontal in the 50px gap)
+  - type: arrow
+    id: couple_rha_lya
+    x: 131
+    y: 287
+    points: [[0, 0], [48, 0]]
+    strokeColor: "#e03131"
+    strokeWidth: 2
+    strokeStyle: dashed
+    startArrowhead: null
+    endArrowhead: null
+    label:
+      text: "恋人"
+      fontSize: 12
+      strokeColor: "#e03131"
+
+  # Cersei — Jaime (恋人, dashed in the 60px gap)
+  - type: arrow
+    id: couple_cer_jai
+    x: 1141
+    y: 287
+    points: [[0, 0], [58, 0]]
+    strokeColor: "#e03131"
+    strokeWidth: 2
+    strokeStyle: dashed
+    startArrowhead: null
+    endArrowhead: null
+    label:
+      text: "恋人"
+      fontSize: 12
+      strokeColor: "#e03131"
+
+  # Cersei — Robert (夫妻, binding arrow auto-routes)
+  - type: arrow
+    id: couple_cer_rob
+    start: { id: cersei }
+    end: { id: robert }
+    strokeColor: "#e03131"
+    strokeWidth: 3
+    startArrowhead: null
+    endArrowhead: null
+    label:
+      text: "夫妻"
+      fontSize: 12
+      strokeColor: "#e03131"
+
+  # Daenerys — Jon Snow (恋人, routed down from Daenerys then left to Jon)
+  # Dany bottom-center (455,315) → Jon top-right 1/4 (185,430)
+  - type: arrow
+    id: couple_dany_jon
+    x: 455
+    y: 316
+    points: [[0, 0], [0, 60], [-270, 114]]
+    strokeColor: "#e03131"
+    strokeWidth: 2
+    strokeStyle: dashed
+    startArrowhead: null
+    endArrowhead: null
+    label:
+      text: "恋人"
+      fontSize: 12
+      strokeColor: "#e03131"
+
+  # =============================================
+  # Parent → Child arrows (explicit points for precise edge connections)
+  # =============================================
+
+  # Aerys → Rhaegar: Aerys bottom-left 1/3 (210,140) → Rhaegar top-center (65,260)
+  - type: arrow
+    id: a_aerys_rha
+    x: 210
+    y: 140
+    points: [[0, 0], [-145, 120]]
+
+  # Aerys → Daenerys: Aerys bottom-right 1/3 (310,140) → Daenerys top-center (455,260)
+  - type: arrow
+    id: a_aerys_dany
+    x: 310
+    y: 140
+    points: [[0, 0], [145, 120]]
+
+  # Ned → Robb/Sansa (binding works fine — nearly vertical)
+  - type: arrow
+    id: a_ned_robb
+    start: { id: ned }
+    end: { id: robb }
+
+  - type: arrow
+    id: a_ned_sansa
+    start: { id: ned }
+    end: { id: sansa }
+
+  - type: arrow
+    id: a_cat_arya
+    start: { id: catelyn }
+    end: { id: arya }
+
+  # Tywin → children (binding works fine — nearly vertical)
+  - type: arrow
+    id: a_tywin_cersei
+    start: { id: tywin }
+    end: { id: cersei }
+
+  - type: arrow
+    id: a_tywin_jaime
+    start: { id: tywin }
+    end: { id: jaime }
+
+  - type: arrow
+    id: a_tywin_tyrion
+    start: { id: tywin }
+    end: { id: tyrion }
+
+  # Rhaegar → Jon: Rhaegar bottom-center (65,315) → Jon top-left 1/4 (95,430)
+  - type: arrow
+    id: a_rha_jon
+    x: 65
+    y: 315
+    points: [[0, 0], [30, 115]]
+
+  # Lyanna → Jon: Lyanna bottom-center (255,315) → Jon top-center (140,430)
+  - type: arrow
+    id: a_lya_jon
+    x: 255
+    y: 315
+    points: [[0, 0], [-115, 115]]
+
+  # Cersei → Joffrey: Cersei bottom-center (1080,315) → Joffrey top-left 1/3 (1103,490)
+  - type: arrow
+    id: a_cer_jof
+    x: 1080
+    y: 315
+    points: [[0, 0], [23, 175]]
+
+  # Robert → Joffrey: Robert LEFT edge center (1200,412) → Joffrey top-right 2/3 (1147,490)
+  # (exits left edge because bottom edge angle would be too shallow)
+  - type: arrow
+    id: a_rob_jof
+    x: 1200
+    y: 412
+    points: [[0, 0], [-53, 78]]
+
+  # =============================================
+  # Annotations
+  # =============================================
+  - type: text
+    id: jon_note
+    x: 20
+    y: 495
+    text: "Rhaegar 与 Lyanna 之子，由 Ned 抚养长大"
+    fontSize: 11
+    strokeColor: "#6741d9"
+
+  - type: text
+    id: joffrey_note
+    x: 1010
+    y: 550
+    text: "实为 Cersei 与 Jaime 之子"
+    fontSize: 11
+    strokeColor: "#e67700"
