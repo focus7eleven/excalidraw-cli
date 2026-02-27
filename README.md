@@ -1,6 +1,25 @@
 # excalidraw-cli
 
-A CLI tool that converts declarative YAML/JSON diagrams into pixel-perfect Excalidraw PNG/SVG images. Designed as a tool for AI agents — write a YAML file, render it, observe the output, and iterate.
+A CLI that converts declarative YAML/JSON into pixel-perfect Excalidraw PNG/SVG. Built for AI agents — write YAML, render, observe the output, fix, repeat.
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [CLI Reference](#cli-reference)
+- [YAML Schema](#yaml-schema)
+  - [Element Types](#element-types)
+  - [Common Properties](#common-properties)
+  - [Shapes](#shapes-rectangle-ellipse-diamond)
+  - [Text](#text)
+  - [Arrows](#arrows)
+- [Rendering Pipeline](#rendering-pipeline)
+- [Agent Workflow](#agent-workflow)
+  - [Iterative Loop](#iterative-loop)
+  - [Layout Rules](#layout-rules)
+  - [Design Palette](#design-palette)
+- [Examples](#examples)
+- [Agent Installation Guide](#agent-installation-guide)
+- [Development](#development)
 
 ## Quick Start
 
@@ -19,7 +38,7 @@ bun run bin/cli.ts render diagram.yaml -o output.svg
 bun run bin/cli.ts render drawing.excalidraw -o output.png
 ```
 
-## CLI Options
+## CLI Reference
 
 ```
 excalidraw-cli render <input> -o <output> [options]
@@ -62,7 +81,7 @@ elements:                      # required, list of elements
 | `diamond` | Diamond with optional label |
 | `text` | Standalone text |
 | `arrow` | Arrow or labeled connector |
-| `line` | Line (no label support — use arrow with null arrowheads) |
+| `line` | Line (no label support — use arrow with null arrowheads instead) |
 | `freedraw` | Freehand drawing |
 | `frame` | Frame container |
 | `image` | Image placeholder |
@@ -75,7 +94,7 @@ All elements support:
 id: my_id              # string, auto-generated if omitted
 x: 100                 # position (default: 0)
 y: 200
-width: 200             # size (default: 200×100 for shapes)
+width: 200             # size (default: 200x100 for shapes)
 height: 100
 strokeColor: "#1e1e1e"
 backgroundColor: "#a5d8ff"
@@ -83,7 +102,7 @@ fillStyle: solid       # solid | hachure | cross-hatch
 strokeWidth: 2
 strokeStyle: solid     # solid | dashed | dotted
 roughness: 1           # 0 (clean) to 2 (sketchy)
-opacity: 100           # 0–100
+opacity: 100           # 0-100
 rotation: 0            # degrees
 groupIds: [g1]         # grouping
 ```
@@ -138,7 +157,7 @@ Three routing methods:
   end: { id: target_shape }
 ```
 
-The engine auto-computes connection points based on relative shape positions. When multiple arrows share the same edge, they are distributed evenly (1/3, 1/4 positions).
+The engine auto-computes connection points based on relative shape positions. When multiple arrows share the same edge, they distribute evenly (1/3, 1/4 positions).
 
 #### 2. Explicit points (precise control)
 
@@ -150,7 +169,7 @@ The engine auto-computes connection points based on relative shape positions. Wh
   points: [[0, 0], [0, 120]]   # relative to (x, y)
 ```
 
-Use explicit points when auto-routing produces bad results (e.g., wrong edge, bad angle).
+Use explicit points when auto-routing produces bad results (wrong edge, bad angle, passing through other shapes).
 
 #### 3. Labeled connectors (couples, relationships)
 
@@ -185,37 +204,39 @@ endArrowhead: arrow      # default: "arrow" for type: arrow
 ## Rendering Pipeline
 
 ```
-YAML/JSON → Zod validation → Skeleton builder → convertToExcalidrawElements (jsdom)
-  → Puppeteer (Chromium) → exportToBlob (PNG) / exportToSvg (SVG)
+YAML/JSON -> Zod validation -> Skeleton builder -> convertToExcalidrawElements (jsdom)
+  -> Puppeteer (Chromium) -> exportToBlob (PNG) / exportToSvg (SVG)
 ```
 
-- Rendering happens in a real Chromium browser via Puppeteer
+- Rendering runs in a real Chromium browser via Puppeteer
 - Uses `@excalidraw/utils` for pixel-perfect output identical to excalidraw.com
 - All fonts (Virgil, Excalifont, etc.) are bundled — no external loading needed
 
-## Agent Skill: Iterative Diagram Workflow
+## Agent Workflow
 
-This CLI is designed for agents to create diagrams through an iterative **draw → observe → fix** loop. The full workflow is documented in `.claude/skills/excalidraw-diagram/SKILL.md`.
+This CLI is built for agents to create diagrams through an iterative loop. The full workflow spec is in [`docs/SKILL.md`](docs/SKILL.md).
 
-### Workflow Summary
+### Iterative Loop
 
-**Never try to output a complete diagram in one shot.** Build iteratively:
+**Never output a complete diagram in one shot.** Build iteratively:
 
 1. **Phase 1 — Nodes only**: Place all shapes with NO arrows. Render, observe, fix spacing/alignment.
 2. **Phase 2 — Connections**: Add arrows one group at a time. Render after each group, fix routing issues.
 3. **Phase 3 — Polish**: Add titles, annotations, labels. Final render and fine-tune.
 
-### Layout Rules (check after EVERY render)
+After each render, read the PNG output and check: crossings, overlaps, arrow routing, label readability, spacing, alignment. Fix any issue before proceeding.
+
+### Layout Rules
 
 1. **No crossings or overlaps** — arrows must not cross each other or pass through unrelated shapes. Rectangles must not overlap.
-2. **Arrow labels need breathing room** — at least 20px of line on each side of a label. At least 50px horizontal gap between shapes for couple connectors.
-3. **Prefer edge centers** — arrows connect to the center of the nearest edge. Multiple arrows on the same edge distribute evenly (N arrows → N+1 equal divisions).
-4. **Choose edge by angle** — if the arrow angle is too shallow relative to an edge (< 20°), connect to an adjacent edge instead.
-5. **Consistent spacing** — 60–100px horizontal gaps, 140–170px vertical gaps between layers.
+2. **Arrow labels need breathing room** — at least 20px of line on each side of a label. At least 50px gap between shapes for couple connectors.
+3. **Prefer edge centers** — arrows connect to the center of the nearest edge. Multiple arrows on the same edge distribute evenly (N arrows -> N+1 equal divisions).
+4. **Choose edge by angle** — if the arrow angle is too shallow relative to an edge (< 20deg), connect to an adjacent edge instead.
+5. **Consistent spacing** — 60-100px horizontal gaps, 140-170px vertical gaps between layers.
 
 ### Design Palette
 
-**Colors (pick ≤ 4 per diagram):**
+**Colors (pick <= 4 per diagram):**
 
 | Category | Fill | Stroke |
 |----------|------|--------|
@@ -226,9 +247,9 @@ This CLI is designed for agents to create diagrams through an iterative **draw �
 | Green | `#b2f2bb` | `#2f9e44` |
 | Cyan | `#99e9f2` | `#0c8599` |
 
-**Font sizes:** Title 20–22, Node labels 15–16, Annotations 13–14, Arrow labels 12–13
+**Font sizes:** Title 20-22, Node labels 15-16, Annotations 13-14, Arrow labels 12-13
 
-**Canvas:** 900–1200px wide
+**Canvas:** 900-1200px wide
 
 ## Examples
 
@@ -269,19 +290,23 @@ elements:
 
 ### Complex: family tree with relationships
 
-See `test/fixtures/game-of-thrones.yaml` — demonstrates:
+See [`test/fixtures/game-of-thrones.yaml`](test/fixtures/game-of-thrones.yaml) — demonstrates:
 - Multi-generational layout with 3 family groups
 - Color-coded houses (purple, blue, orange, green)
-- Couple connectors with CJK labels (夫妻, 恋人)
+- Couple connectors with CJK labels
 - Mixed routing: binding arrows for vertical flows, explicit points for precise control
 - Annotations and text labels
 
 ### Architecture diagram
 
-See `test/fixtures/project-architecture.yaml` — demonstrates:
+See [`test/fixtures/project-architecture.yaml`](test/fixtures/project-architecture.yaml) — demonstrates:
 - 7-layer vertical flow
 - Auto-routed binding arrows with edge spread distribution
 - Side connections
+
+## Agent Installation Guide
+
+See [`docs/AGENT_SETUP.md`](docs/AGENT_SETUP.md) for a step-by-step guide on how to install excalidraw-cli as a skill for any Claude Code agent.
 
 ## Development
 
